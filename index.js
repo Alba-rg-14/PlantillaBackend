@@ -32,11 +32,17 @@ const mapasRouter = require("./Controller/mapasRouter");
 app.use("/mapas", mapasRouter);
 
 // Rutas
-const entidadRouter = require("./Controller/entidadRouter");
-app.use("/entidades", entidadRouter);
+const PeliculasRouter = require("./Controller/PeliculasRouter");
+app.use("/peliculas", PeliculasRouter);
 
-const hijaRouter = require("./Controller/hijaRouter");
-app.use("/hijas", hijaRouter);
+const SalasRouter = require("./Controller/SalasRouter");
+app.use("/salas", SalasRouter);
+
+const ProyeccionRouter = require("./Controller/ProyeccionRouter");
+app.use("/proyecciones", ProyeccionRouter);
+
+const ValoracionRouter = require("./Controller/ValoracionRouter");
+app.use("/valoraciones", ValoracionRouter);
 
 // Iniciar servidor
 app.listen(PORT, () => console.log(`Backend ready for Parcial3 ready on port ${PORT}.`));

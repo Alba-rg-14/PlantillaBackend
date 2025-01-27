@@ -5,7 +5,7 @@ async function connectBD() {
     const password = "examen";
     const dbName = "examen";
 
-    mongoose.connect('mongodb+srv://albargrrss:u9pa0KMdm5QLnyFu@clusterrelapp.ancnn.mongodb.net/plantillaBD', { useNewUrlParser: true, useUnifiedTopology: true })
+    mongoose.connect('mongodb+srv://albargrrss:u9pa0KMdm5QLnyFu@clusterrelapp.ancnn.mongodb.net/examen', { useNewUrlParser: true, useUnifiedTopology: true })
         .then(() => console.log('Conectado a MongoDB'))
         .catch(err => console.error('Error en la conexión:', err));
 
