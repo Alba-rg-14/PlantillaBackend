@@ -77,7 +77,78 @@ entidadRouter.get("/cercanos", async (req, res) => {
     }
 });
 
+// Filtrar entidades por parte de su nombre
+entidadRouter.get("/nombre/:nombre", async (req, res) => {
 
+    try {
+        const { nombre } = req.params;
+        console.log("Buscando por nombre:", nombre); // Verifica el filtro que llega
+        const entidades = await Entidad.find({ nombre: { $regex: nombre, $options: "i" } });
+        res.status(200).json(entidades);
+        console.log("Entidades encontradas:", entidades); // Verifica las entidades encontradas
+    } catch (error) {
+        console.error("Error al buscar entidades por nombre:", error);
+        res.status(500).json({ mensaje: "Error al buscar entidades por nombre", error });
+    }
+});
 
+// Borrar una entidad
+entidadRouter.delete("/borrar/:id", async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const entidadEliminada = await Entidad.findByIdAndDelete(id);
+
+        if (!entidadEliminada) {
+            return res.status(404).json({ mensaje: "Entidad no encontrada" });
+        }
+
+        res.status(200).json({ mensaje: "Entidad eliminada exitosamente", entidad: entidadEliminada });
+    } catch (error) {
+        console.error("Error al borrar la entidad:", error);
+        res.status(500).json({ mensaje: "Error al borrar la entidad", error });
+    }
+});
+
+// Actualizar una entidad
+entidadRouter.put("/actualizar/:id", async (req, res) => {
+    const { id } = req.params;
+    const { nombre, descripcion, creador, categoria, direccion, coordenadas } = req.body;
+
+    try {
+        const entidadActualizada = await Entidad.findByIdAndUpdate(
+            id,
+            { nombre, descripcion, creador, categoria, direccion, coordenadas },
+            { new: true, runValidators: true }
+        );
+
+        if (!entidadActualizada) {
+            return res.status(404).json({ mensaje: "Entidad no encontrada" });
+        }
+
+        res.status(200).json({ mensaje: "Entidad actualizada exitosamente", entidad: entidadActualizada });
+    } catch (error) {
+        console.error("Error al actualizar la entidad:", error);
+        res.status(500).json({ mensaje: "Error al actualizar la entidad", error });
+    }
+});
+
+// Obtener una entidad por su ID
+entidadRouter.get("/:id", async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const entidad = await Entidad.findById(id);
+
+        if (!entidad) {
+            return res.status(404).json({ mensaje: "Entidad no encontrada" });
+        }
+
+        res.status(200).json(entidad);
+    } catch (error) {
+        console.error("Error al obtener la entidad:", error);
+        res.status(500).json({ mensaje: "Error al obtener la entidad", error });
+    }
+});
 
 module.exports = entidadRouter;

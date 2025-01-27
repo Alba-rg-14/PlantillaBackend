@@ -14,11 +14,11 @@ cloudinary.config({
 // Configuración de multer para manejar múltiples archivos
 const upload = multer({ dest: "uploads/" });
 
-// Ruta para subir múltiples imágenes
 imagenesRouter.post("/subir", upload.array("imagenes", 5), async (req, res) => {
     try {
+        // Si no hay imágenes, devuelve un array vacío
         if (!req.files || req.files.length === 0) {
-            return res.status(400).json({ mensaje: "Debes proporcionar al menos una imagen" });
+            return res.status(200).json([]); // Devolver un array vacío si no se suben imágenes
         }
 
         // Subir todas las imágenes a Cloudinary
@@ -44,5 +44,6 @@ imagenesRouter.post("/subir", upload.array("imagenes", 5), async (req, res) => {
         res.status(500).json({ mensaje: "Error al subir imágenes", error: error.message });
     }
 });
+
 
 module.exports = imagenesRouter;

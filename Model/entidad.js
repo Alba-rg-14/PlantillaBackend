@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const EntidadSchema = new mongoose.Schema({
     nombre: { type: String, required: true },
     descripcion: { type: String, required: false },
-    creador: { type: String, required: true }, // Ejemplo: email o ID del usuario
+    creador: { type: String, required: false }, // Ejemplo: email o ID del usuario
     categoria: { type: String, required: true }, // Ejemplo: "Restaurante", "Evento"
     direccion: { type: String, required: true }, // Dirección completa
     coordenadas: {
