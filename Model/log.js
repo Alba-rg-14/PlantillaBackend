@@ -7,4 +7,4 @@ const LogSchema = new mongoose.Schema({
     token: { type: String, required: false }
 });
 
-module.exports = mongoose.model('Log', LogSchema);
+module.exports = mongoose.model('log', LogSchema);

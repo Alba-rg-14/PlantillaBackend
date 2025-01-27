@@ -1,6 +1,6 @@
 const express = require("express");
 const logRouter = express.Router();
-const Log = require("../Model/log"); // Asegúrate de que el modelo está correctamente importado
+const log = require("../Model/log"); // Asegúrate de que el modelo está correctamente importado
 
 // GET ALL Logs
 logRouter.get("/", async (req, res) => {
